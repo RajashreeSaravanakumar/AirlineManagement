@@ -1,3 +1,4 @@
+//encrypting text
 public class VigenereCipher1 {
 public static String encipher(String s, String key){
 StringBuilder builder = new StringBuilder();
