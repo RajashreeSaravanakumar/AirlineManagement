@@ -1,0 +1,46 @@
+public class VigenereCipher1 {
+public static String encipher(String s, String key){
+StringBuilder builder = new StringBuilder();
+for(int i = 0; i &lt; s.length(); i ++)
+{
+if(s.charAt(i) &lt; 65 || s.charAt(i) &gt; 90)
+{
+//ASCII character (capital letter)
+throw new IllegalArgumentException(&quot;&quot; +&quot;Open text must contain only capital letters&quot;);
+}
+//add shift modularly
+char encyphered = s.charAt(i) + getShift(key, i) &gt; 90 ? (char)((s.charAt(i) + getShift(key, i)) -
+26) : (char)(s.charAt(i) + getShift(key, i));
+builder.append(encyphered);
+}
+return builder.toString();
+}
+public static String decipher(String s, String key){
+StringBuilder builder = new StringBuilder();
+for(int i = 0; i &lt; s.length(); i ++){
+if(s.charAt(i) &lt; 65 || s.charAt(i) &gt; 90){ //ASCII character (capital letter)
+throw new IllegalArgumentException(&quot;&quot; +&quot;Ciphertext must contain only capital letters&quot;);
+}
+//subtract shift modularly
+char decyphered = s.charAt(i) - getShift(key, i) &lt; 65 ? (char)((s.charAt(i) - getShift(key, i)) +
+26) : (char)(s.charAt(i) - getShift(key, i));
+builder.append(decyphered);
+}
+return builder.toString();
+
+}
+private static int getShift(String key, int i) {
+if(key.charAt(i % key.length()) &lt; 65 || key.charAt(i % key.length()) &gt; 90){
+throw new IllegalArgumentException(&quot;&quot; +&quot;Key phrase must contain only capital letters&quot;);
+}
+return ((int)key.charAt(i % key.length())) - 65;
+}
+public static void main(String[] args)
+{
+String text = &quot;ATTACKATDAWN&quot;;
+String key = &quot;CAT&quot;;
+String enciphered = encipher(text, key);
+System.out.println(&quot;Encrypted message:&quot;+enciphered);
+System.out.println(&quot;Original message recovered:&quot;+decipher(enciphered, key));
+}
+}
