@@ -1,4 +1,3 @@
-//Hill cipher encryption and decryption
 import javax.swing.JOptionPane;
 public class HillCipher1
 {
